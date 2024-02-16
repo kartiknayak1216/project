@@ -10,6 +10,7 @@ import Todorouter from "./route/Todo.route.js";
 import path from "path";
 dotenv.config();
 
+const __dirname = path.resolve();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,7 +21,10 @@ const port = process.env.PORT || 3000;
 app.use("/api", Authrouter);
 app.use("/api", Userrouter);
 app.use("/api/todo", Todorouter);
-
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 // middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
