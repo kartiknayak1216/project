@@ -39,7 +39,7 @@ export default function Signin() {
 
       if (res.ok) {
         dispatch(signInSuccess(responseData));
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
